@@ -1,0 +1,31 @@
+#!/bin/bash
+ROOT="${HOME}/Mail"
+
+function print_account() {
+    ACCOUNT="$1"
+    echo "               Account: ${ACCOUNT}"
+
+    printf "%-40s %6s %6s\n" "Maildir" "Count" "Size"
+    echo "------------------------------------------------------"
+
+    find "${ROOT}/${ACCOUNT}/" -type d -name "new" -print0 | while read -d $'\0' FILE
+    do
+        FILE=${FILE%"/new"}
+        CNT=$(find "${FILE}" | wc -l)
+        SIZE=$(du -sh "${FILE}" | cut -f1)
+        FILE=${FILE##"${ROOT}/${ACCOUNT}/"}
+        printf "%-40s %6s %6s\n" "${FILE}" "${CNT}" "${SIZE}"
+    done | sort
+
+    echo "------------------------------------------------------"
+    CNT=$(find "${ROOT}/" | wc -l)
+    SIZE=$(du -sh "${ROOT}/" | cut -f1)
+
+    printf "%-40s %6s %6s\n" "Total" "${CNT}" "${SIZE}"
+}
+
+for ACCOUNT in "${ROOT}/*"; do
+    print_account $(basename ${ACCOUNT})
+done
+
+

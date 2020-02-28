@@ -1,0 +1,11 @@
+#!/bin/bash
+ROOT="${HOME}/Mail/gmail"
+
+echo "# vim: filetype=neomuttrc"
+echo "mailboxes =INBOX"
+find "${ROOT}/" -type d -name "new" -print0 | while read -d $'\0' FILE
+do
+    FILE=${FILE%"/new"}
+    FILE=${FILE##"${ROOT}/"}
+    echo "mailboxes =\"${FILE}\""
+done | grep -v "INBOX" | sort
