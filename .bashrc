@@ -2,6 +2,14 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# See https://wiki.archlinux.org/index.php/XDG_Base_Directory
+# User-specific configurations should go into:
+export XDG_CONFIG_HOME=$HOME/.config
+# User-specific non-essential (cached) data should go into:
+export XDG_CACHE_HOME=$HOME/.cache
+# User-specific data files should go into:
+export XDG_DATA_HOME=$HOME/.local/share
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
