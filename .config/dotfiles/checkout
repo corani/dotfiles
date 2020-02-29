@@ -1,0 +1,28 @@
+#!/bin/bash
+git clone --bare git@github.com:corani/dotfiles $HOME/.dotfiles
+
+function dotfiles {
+   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+}
+
+function my-mv () {
+    dir="$2"
+    tmp="$2"; tmp="${tmp: -1}"
+    [ "$tmp" != "/" ] && dir="$(dirname "$2")"
+    [ -a "$dir" ] ||
+    mkdir -p "$dir" &&
+    mv "$@"
+}
+
+dotfiles checkout -q
+if [ $? = 0 ]; then
+    echo "Checked out config.";
+else
+    echo "Backing up pre-existing dot files in $HOME/.dotfiles-backup";
+    mkdir -p .dotfiles-backup
+    for FILE in $(dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'}); do
+        my-mv "${FILE}" ".dotfiles-backup/${FILE}"
+    done
+fi;
+dotfiles checkout
+dotfiles config status.showUntrackedFiles no
