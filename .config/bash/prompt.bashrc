@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# To update the Tilda tabname according to the working directory
+export PROMPT_COMMAND='echo -ne "\033]2;${PWD/#${HOME}/\~}\007"'
+
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
 xterm-color|*-256color)
@@ -8,7 +12,7 @@ xterm-color|*-256color)
 esac
 
 if [ -f $(which powerline-daemon) ]; then
-    powerline-daemon -q
+    powerline-daemon --quiet --replace
     export POWERLINE_BASH_CONTINUATION=1
     export POWERLINE_BASH_SELECT=1
     source $(pip show powerline-status | grep Location | cut -d':' -f2)/powerline/bindings/bash/powerline.sh

@@ -1,8 +1,11 @@
 #!/bin/bash
 
+alias open='xdg-open'
+alias pbcopy='xsel --clipboard --input'
+alias pbpaste='xsel --clipboard --output'
 alias vim=nvim
 alias mutt=neomutt
-alias dotfiles='/usr/bin/git --git-dir=/sapmnt/HOME/i331555/.dotfiles --work-tree=/sapmnt/HOME/i331555'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then

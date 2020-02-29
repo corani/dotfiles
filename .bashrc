@@ -41,14 +41,6 @@ shopt -s globstar
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-if [ -f ~/.config/bash/aliases.bashrc ]; then
-    . ~/.config/bash/aliases.bashrc
-fi
-
-if [ -f ~/.config/bash/prompt.bashrc ]; then
-    . ~/.config/bash/prompt.bashrc
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -61,11 +53,26 @@ if ! shopt -oq posix; then
 fi
 
 export GPG_TTY=`tty`
+export EDITOR="nvim"
+
+# For ranger
+PYGMENTIZE_STYLE=monokai
 
 if [ -f ~/.config/bash/local.bashrc ]; then
     . ~/.config/bash/local.bashrc
 fi
 
+if [ -f ~/.config/bash/aliases.bashrc ]; then
+    . ~/.config/bash/aliases.bashrc
+fi
+
+if [ -f ~/.config/bash/prompt.bashrc ]; then
+    . ~/.config/bash/prompt.bashrc
+fi
+
 if [ -f /usr/bin/neofetch ]; then
     neofetch
 fi
+
+# bash vim mode
+set -o vi
