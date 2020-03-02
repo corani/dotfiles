@@ -7,7 +7,6 @@ export PROMPT_COMMAND='echo -ne "\033]2;${PWD/#${HOME}/\~}\007"'
 case "$TERM" in
 xterm-color|*-256color)
     color_prompt=yes
-    export TERM=screen-256color
     ;;
 esac
 
