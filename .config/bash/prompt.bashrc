@@ -10,7 +10,8 @@ xterm-color|*-256color)
     ;;
 esac
 
-if [ -f $(which powerline-daemon) ]; then
+command -v powerline-daemon > /dev/null 2>&1
+if [ $? -ne 1 ]; then
     powerline-daemon --quiet --replace
     export POWERLINE_BASH_CONTINUATION=1
     export POWERLINE_BASH_SELECT=1
