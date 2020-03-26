@@ -66,6 +66,10 @@ if [ -f ~/.config/bash/aliases.bashrc ]; then
     . ~/.config/bash/aliases.bashrc
 fi
 
+if [ -f ~/.config/bash/cleanup.bashrc ]; then
+    . ~/.config/bash/cleanup.bashrc
+fi
+
 if [ -f ~/.config/bash/prompt.bashrc ]; then
     . ~/.config/bash/prompt.bashrc
 fi

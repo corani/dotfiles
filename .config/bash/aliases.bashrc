@@ -7,6 +7,7 @@ alias vim=nvim
 alias mutt=neomutt
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
 alias tmux='TERM=screen-256color tmux -f "$XDG_CONFIG_HOME"/tmux/tmux.conf'
+alias abook="abook -C $XDG_CONFIG_HOME/abook/abookrc --datafile $XDG_CONFIG_HOME/abook/addresbook"
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
