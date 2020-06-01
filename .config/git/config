@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+    name = Daniel Bos
+
+[commit]
+    gpgsign = true
+
+[core]
+    editor = nvim
+
+[alias]
+    aliases = !git config --list | grep alias | cut -c 7-
+    co-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1' -
+    plog = log --graph --decorate --pretty=oneline --abbrev-commit --all
+
+[include]
+    path = private.gitconfig
