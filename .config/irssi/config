@@ -26,14 +26,15 @@ chatnets = {
     max_msgs = "4";
     max_whois = "1";
   };
-  zeronode = {
-    type = "IRC";
-    nick = "corani";
-  };
+  zeronode = { type = "IRC"; nick = "corani"; };
 };
 
 channels = (
-  { name = "#noagenda"; chatnet = "zeronode"; autojoin = "yes"; }
+  { name = "#noagenda"; chatnet = "zeronode"; autojoin = "yes"; },
+  { name = "#go-nuts"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "##parsers"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "##logic"; chatnet = "FreeNode"; autojoin = "yes"; },
+  { name = "#neovim"; chatnet = "FreeNode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -297,6 +298,8 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = {
     autolog = "yes";
-    autolog_path = "$XDG_DATA_HOME/irssi/logs/$tag/$0.%Y-%m-%d.log";
+    autolog_path = "$XDG_DATA_HOME/irssi/logs/$tag/$0/%Y-%m-%d.log";
   };
 };
+logs = { };
+ignores = ( { level = "JOINS PARTS QUITS"; } );
