@@ -18,17 +18,23 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'tomasr/molokai'
 Plugin 'godlygeek/tabular'
 Plugin 'nathanaelkane/vim-indent-guides'
-"Plugin 'SirVer/ultisnips'
-"Plugin 'honza/vim-snippets'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'duff/vim-scratch'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+" code completion
+" curl -sL install-node.now.sh/lts | sudo -E bash -
+" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+" sudo apt update && sudo apt install yarn
+Plugin 'neoclide/coc.nvim'
 Plugin 'fatih/vim-go'
 Plugin 'sebdah/vim-delve'
+
+Plugin 'duff/vim-scratch'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+"Plugin 'tomasr/molokai'
 Plugin 'junegunn/seoul256.vim'
+" :Goyo to remove distractions
+Plugin 'junegunn/goyo.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'leafgarland/typescript-vim'
@@ -36,11 +42,22 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ap/vim-css-color'
 Plugin 'vifm/vifm.vim'
+Plugin 'dhruvasagar/vim-table-mode'
+
 Plugin 'vimwiki/vimwiki'
+Plugin 'mattn/calendar-vim'
+
+" Nerdtree
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ryanoasis/vim-devicons'
+
+" Motions
+" <leader><leader>f / b search forward/backwards
+" <leader><leader>j / k jump line forward/backward
+" <leader><leader>n / N jump next / previous highlighted search
+Plugin 'easymotion/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -128,7 +145,15 @@ map <Leader>vv :Vifm<CR>
 map <Leader>vs :VsplitVifm<CR>
 
 " VimWiki
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
+let g:vimwiki_global_ext = 0
+"map <Leader>ww :VimwikiIndex<CR>
+"map <Leader>wi :VimwikiDiaryIndex<CR>
+"map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
+
+" Calendar
+let g:calendar_monday = 1
+let g:calendar_weeknm = 1
 
 " NERDtree
 " in normal mode: \nt
@@ -141,3 +166,16 @@ let g:NERDTreePatternMatchHighlightFullName = 1
 
 " Mouse scrolling
 set mouse=nicr"
+
+" Keep visual select
+vmap < <gv
+vmap > >gv
+
+" Goyo
+map <Leader>g :Goyo<CR>
+let g:goyo_width = 100
+
+" COC
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+endif

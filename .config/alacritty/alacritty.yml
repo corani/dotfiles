@@ -1,5 +1,6 @@
 font:
     normal:
-        family: JetbrainsMono
-    size: 5.0
+        family: Cascadia Code PL
+        style: Regular
+    size: 10.0
 background_opacity: 0.7

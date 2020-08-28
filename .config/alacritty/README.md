@@ -1,3 +1,7 @@
 # Alacritty
 
-Install: https://github.com/alacritty/alacritty#pop_os--ubuntu
+```bash
+sudo add-apt-repository ppa:mmstick76/alacritty
+sudo apt-get update
+sudo apt install alacritty
+```

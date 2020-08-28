@@ -12,3 +12,5 @@ export BASH_COMPLETION_USER_FILE="$XDG_CONFIG_HOME"/bash/bash_completion
 
 export CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache/config
 export CCACHE_DIR="$XDG_CACHE_HOME"/ccache
+
+export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
