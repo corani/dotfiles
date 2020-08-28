@@ -182,5 +182,4 @@ bar {
 bindsym $mod+x exec "~/.config/i3/i3lock.sh"
 exec --no-startup-id xautolock -locker "~/.config/i3/i3lock.sh" -time 10 -detectsleep -notify 10
 
-exec "compton -c -i .75"
-exec "~/.config/i3/fehbg"
+exec "~/.config/i3/start.sh"
