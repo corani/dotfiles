@@ -4,6 +4,10 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+if has('termguicolors')
+    set termguicolors
+endif
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -26,15 +30,30 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 " sudo apt update && sudo apt install yarn
 Plugin 'neoclide/coc.nvim'
+" :CocInstall coc-snippets
+Plugin 'honza/vim-snippets'
+
 Plugin 'fatih/vim-go'
 Plugin 'sebdah/vim-delve'
 
 Plugin 'duff/vim-scratch'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
+
 "Plugin 'tomasr/molokai'
 Plugin 'junegunn/seoul256.vim'
+"Plugin 'jacoborus/tender.vim'
+"Plugin 'sainnhe/sonokai'
+"Plugin 'joshdick/onedark.vim'
+
 " :Goyo to remove distractions
 Plugin 'junegunn/goyo.vim'
+
+" Find stuff
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+Plugin 'airblade/vim-rooter'
+
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'leafgarland/typescript-vim'
@@ -58,6 +77,10 @@ Plugin 'ryanoasis/vim-devicons'
 " <leader><leader>j / k jump line forward/backward
 " <leader><leader>n / N jump next / previous highlighted search
 Plugin 'easymotion/vim-easymotion'
+
+Plugin 'liuchengxu/vim-which-key'
+
+Plugin 'voldikss/vim-floaterm'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -102,9 +125,17 @@ set undodir=~/.vim/undo
 set whichwrap=b,s,<,>,[,]
 set wildmenu
 
-"color molokai
+"colorscheme molokai
 let g:seoul256_background = 233
-color seoul256
+colorscheme seoul256
+"let g:airline_theme = 'tender'
+"colorscheme tender
+"let g:sonokai_style = 'shusia'
+"let g:airline_theme = 'sonokai'
+"colorscheme sonokai
+"let g:airline_theme = 'onedark'
+"colorscheme onedark
+
 set number
 set cursorline
 set cursorcolumn
@@ -117,6 +148,7 @@ set expandtab
 set smartindent
 set nobackup
 set nowritebackup
+
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
@@ -172,10 +204,51 @@ vmap < <gv
 vmap > >gv
 
 " Goyo
-map <Leader>g :Goyo<CR>
 let g:goyo_width = 100
 
 " COC
 if has('nvim')
     inoremap <silent><expr> <c-space> coc#refresh()
 endif
+
+" Vim Which Key
+nnoremap <silent> <leader> :WhichKey "\\"<CR>
+
+let g:which_key_use_floating_win = 0
+highlight default link WhichKey Operator
+highlight default link WhichKeySeperator DiffAdded
+highlight default link WhichKeyGroup Identifier
+highlight default link WhichKeyDesc Function
+
+let g:which_key_map = {}
+let g:which_key_map['z'] = [ 'Goyo', 'zen' ]
+let g:which_key_map.s = {
+    \ 'name': '+search',
+    \ 'f': [ ':Files',      'Files' ],
+    \ 'l': [ ':Lines',      'Lines' ],
+    \ }
+let g:which_key_map.t = {
+    \ 'name': '+terminal',
+    \ ';': [ ':FloatermNew --wintype=normal --height=12',   'Terminal'  ],
+    \ 'g': [ ':FloatermNew lazygit',                        'Git'       ],
+    \ 'd': [ ':FloatermNew lazydocker',                     'Docker'    ],
+    \ }
+
+call which_key#register('\', "g:which_key_map")
+
+" FZF
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+nnoremap <silent> <leader>sf :Files<CR>
+
+" Floaterm
+"
+let g:floaterm_keymap_toggle = '<F1>'
+let g:floaterm_keymap_next   = '<F2>'
+let g:floaterm_keymap_prev   = '<F3>'
+let g:floaterm_keymap_new    = '<F4>'
+
+let g:floaterm_wintitle = 0
+let g:floaterm_autoclose = 1
+let g:floaterm_autoinsert = 1
+let g:floaterm_width = 0.8
+let g:floaterm_height = 0.8

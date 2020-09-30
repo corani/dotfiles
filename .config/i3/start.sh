@@ -5,7 +5,7 @@ xdpyinfo -display "${DISPLAY:-":0"}" 2>/dev/null | grep -q "VNC-EXTENSION"
 VNC=$?
 
 if [ $VNC -ne 0 ]; then
-    compton -c -i .75 &
+    compton --config ~/.config/compton/config -b
 fi
 
 ~/.config/i3/fehbg

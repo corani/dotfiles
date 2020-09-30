@@ -58,6 +58,10 @@ export EDITOR="nvim"
 # For ranger
 PYGMENTIZE_STYLE=monokai
 
+if [ -f ~/.config/bash/completion.bashrc ]; then
+    . ~/.config/bash/completion.bashrc
+fi
+
 if [ -f ~/.config/bash/aliases.bashrc ]; then
     . ~/.config/bash/aliases.bashrc
 fi
@@ -75,8 +79,7 @@ if [ -f ~/.config/bash/local.bashrc ]; then
 fi
 
 if [ -f /usr/bin/neofetch ]; then
-#    neofetch
-    echo
+    neofetch
 fi
 
 # bash vim mode

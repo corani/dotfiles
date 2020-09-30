@@ -44,3 +44,6 @@ function mcd() {
 # Install: https://github.com/sharkdp/bat/releases
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 alias cat=bat
+
+# Install: https://github.com/junegunn/fzf
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
