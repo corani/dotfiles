@@ -28,7 +28,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Download from https://github.com/Peltoche/lsd/releases 
-alias ls='lsd --icon-theme unicode'
+alias ls='lsd --icon-theme fancy'
 
 # ask before overwriting
 alias cp="cp -i"

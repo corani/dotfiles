@@ -8,4 +8,6 @@ if [ $VNC -ne 0 ]; then
     compton --config ~/.config/compton/config -b
 fi
 
+~/.config/polybar/launch.sh
 ~/.config/i3/fehbg
+dunst &
