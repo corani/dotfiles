@@ -2,100 +2,88 @@
 " Install new plugins: PluginInstall
 
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 if has('termguicolors')
     set termguicolors
 endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" install vim-plug
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/bundle')
+Plug 'junegunn/vim-plug'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'godlygeek/tabular'
-Plugin 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'godlygeek/tabular'
+Plug 'nathanaelkane/vim-indent-guides'
 " code completion
 " curl -sL install-node.now.sh/lts | sudo -E bash -
 " curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
 " echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 " sudo apt update && sudo apt install yarn
-Plugin 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " :CocInstall coc-snippets
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
-Plugin 'fatih/vim-go'
-Plugin 'sebdah/vim-delve'
+Plug 'fatih/vim-go'
+Plug 'sebdah/vim-delve'
 
-Plugin 'duff/vim-scratch'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'duff/vim-scratch'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
-
-"Plugin 'tomasr/molokai'
-Plugin 'junegunn/seoul256.vim'
-"Plugin 'jacoborus/tender.vim'
-"Plugin 'sainnhe/sonokai'
-"Plugin 'joshdick/onedark.vim'
+" colorthemes
+"Plug 'tomasr/molokai'
+"Plug 'junegunn/seoul256.vim'
+"Plug 'jacoborus/tender.vim'
+"Plug 'sainnhe/sonokai'
+"Plug 'joshdick/onedark.vim'
+Plug 'morhetz/gruvbox'
+"Plug 'arcticicestudio/nord-vim'
 
 " :Goyo to remove distractions
-Plugin 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 
 " Find stuff
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'airblade/vim-rooter'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'mzlogin/vim-markdown-toc'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'ap/vim-css-color'
-Plugin 'vifm/vifm.vim'
-Plugin 'dhruvasagar/vim-table-mode'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'leafgarland/typescript-vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'ap/vim-css-color'
+Plug 'vifm/vifm.vim'
+Plug 'dhruvasagar/vim-table-mode'
 
-Plugin 'vimwiki/vimwiki'
-Plugin 'mattn/calendar-vim'
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
 
 " Nerdtree
-Plugin 'preservim/nerdtree'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plugin 'ryanoasis/vim-devicons'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'ryanoasis/vim-devicons'
 
 " Motions
 " <leader><leader>f / b search forward/backwards
 " <leader><leader>j / k jump line forward/backward
 " <leader><leader>n / N jump next / previous highlighted search
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
-Plugin 'liuchengxu/vim-which-key'
+Plug 'liuchengxu/vim-which-key'
 
-Plugin 'voldikss/vim-floaterm'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+Plug 'voldikss/vim-floaterm'
+call plug#end()
 
 set t_Co=256
 set encoding=utf-8
@@ -118,6 +106,8 @@ set ruler
 set scrolloff=5
 set selection=exclusive
 set selectmode=mouse,key
+set title
+set titlestring=nvim:\ %t
 set ttimeout
 set ttimeoutlen=100
 set undofile
@@ -126,8 +116,8 @@ set whichwrap=b,s,<,>,[,]
 set wildmenu
 
 "colorscheme molokai
-let g:seoul256_background = 233
-colorscheme seoul256
+"let g:seoul256_background = 234
+"colorscheme seoul256
 "let g:airline_theme = 'tender'
 "colorscheme tender
 "let g:sonokai_style = 'shusia'
@@ -135,10 +125,11 @@ colorscheme seoul256
 "colorscheme sonokai
 "let g:airline_theme = 'onedark'
 "colorscheme onedark
+let g:airline_theme = 'gruvbox'
+colorscheme gruvbox
+"colorscheme nord
 
 set number
-set cursorline
-set cursorcolumn
 syntax on
 set clipboard=unnamed
 set tabstop=4
@@ -148,6 +139,26 @@ set expandtab
 set smartindent
 set nobackup
 set nowritebackup
+
+" show cursorline (always) and cursorcolumn (in active buffer)
+set cursorline
+augroup CursorColumn
+    au!
+    au VimEnter * setlocal cursorcolumn
+    au WinEnter * setlocal cursorcolumn
+    au BufWinEnter * setlocal cursorcolumn
+    au WinLeave * setlocal nocursorcolumn
+augroup END
+
+" spell check
+autocmd FileType markdown setlocal spell complete+=kspell
+" In normal mode:
+"   ]s / [s next / previous spell error
+"   z= show corrections
+"   zg add to dictionary
+"   zw mark as incorrect
+" In insert mode:
+"   <C-n> to auto-complete
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -161,9 +172,6 @@ set laststatus=2
 " Indent Guides
 let g:indent_guides_guide_size = 1
 "let g:indent_guides_enable_on_vim_startup = 1
-
-" UltiSnip
-let g:UltiSnipsExpandTrigger="<c-cr>"
 
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
@@ -232,6 +240,12 @@ let g:which_key_map.t = {
     \ ';': [ ':FloatermNew --wintype=normal --height=12',   'Terminal'  ],
     \ 'g': [ ':FloatermNew lazygit',                        'Git'       ],
     \ 'd': [ ':FloatermNew lazydocker',                     'Docker'    ],
+    \ }
+let g:which_key_map.g = {
+    \ 'name': 'Go To',
+    \ 'd': [ ":call CocAction('jumpDefinition')", 'Definition' ],
+    \ 'i': [ ":call CocAction('jumpImplementation')", 'Implementation' ],
+    \ 'r': [ ":call CocAction('jumpReferences')", 'References' ],
     \ }
 
 call which_key#register('\', "g:which_key_map")
