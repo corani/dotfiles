@@ -78,8 +78,12 @@ if [ -f ~/.config/bash/local.bashrc ]; then
     . ~/.config/bash/local.bashrc
 fi
 
-if [ -f /usr/bin/neofetch ]; then
-    neofetch
+#if [ -f /usr/bin/neofetch ]; then
+#    neofetch
+#fi
+if [ -f ~/.config/fortune/stoic ]; then
+    strfile -c % ~/.config/fortune/stoic > /dev/null
+    fortune ~/.config/fortune/ | cowthink -W 60
 fi
 
 # bash vim mode
