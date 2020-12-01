@@ -1,3 +1,12 @@
 {
-    "snippets.userSnippetsDirectory": "~/.config/nvim/snips"
+    "coc.preferences.formatOnSaveFiletypes": ["go"],
+    "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
+    "suggest.floatEnable": true,
+    "coc.preferences.hoverTarget": "float",
+    "codeLens.enable": true,
+    "diagnostic.virtualText": true,
+    "go.goplsOptions": {
+        "hoverKind": "FullDocumentation",
+        "completionDocumentation": true
+    }
 }

@@ -1,11 +1,7 @@
 " Reload _vimrc: :so %
-" Install new plugins: PluginInstall
+" Install new plugins: PlugInstall
 
 set nocompatible              " be iMproved, required
-
-if has('termguicolors')
-    set termguicolors
-endif
 
 " install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
@@ -24,19 +20,28 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
-" code completion
-" curl -sL install-node.now.sh/lts | sudo -E bash -
-" curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-" echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-" sudo apt update && sudo apt install yarn
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" :CocInstall coc-snippets
-Plug 'honza/vim-snippets'
 
+if has('nvim')
+    " code completion
+    " curl -sL install-node.now.sh/lts | sudo -E bash -
+    " curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    " echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    " sudo apt update && sudo apt install yarn
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+    "Plug 'neoclide/coc.nvim', {'branch': 'master'}
+    " :CocInstall coc-snippets
+    Plug 'honza/vim-snippets'
+
+    " Better syntax highlighting
+    Plug 'nvim-treesitter/nvim-treesitter'
+endif
+
+" Go
 Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
-Plug 'duff/vim-scratch'
+Plug 'mtth/scratch.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " colorthemes
@@ -85,9 +90,20 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'voldikss/vim-floaterm'
 call plug#end()
 
+" vimplug: check if plugin is loaded
+function! PlugLoaded(name)
+    return (
+        \ has_key(g:plugs, a:name) &&
+        \ isdirectory(g:plugs[a:name].dir) &&
+        \ stridx(&rtp, trim(g:plugs[a:name].dir, '/', 2)) >= 0)
+endfunction
+
+if has('termguicolors')
+    set termguicolors
+endif
+
 set t_Co=256
 set encoding=utf-8
-set background=dark
 set backspace=indent,eol,start
 set backup
 set diffexpr=MyDiff()
@@ -114,21 +130,6 @@ set undofile
 set undodir=~/.vim/undo
 set whichwrap=b,s,<,>,[,]
 set wildmenu
-
-"colorscheme molokai
-"let g:seoul256_background = 234
-"colorscheme seoul256
-"let g:airline_theme = 'tender'
-"colorscheme tender
-"let g:sonokai_style = 'shusia'
-"let g:airline_theme = 'sonokai'
-"colorscheme sonokai
-"let g:airline_theme = 'onedark'
-"colorscheme onedark
-let g:airline_theme = 'gruvbox'
-colorscheme gruvbox
-"colorscheme nord
-
 set number
 syntax on
 set clipboard=unnamed
@@ -139,6 +140,45 @@ set expandtab
 set smartindent
 set nobackup
 set nowritebackup
+" hide unsaved buffers instead of closing them
+set hidden
+" Mouse scrolling
+set mouse=nicr"
+
+
+set background=dark
+"colorscheme molokai
+"let g:seoul256_background = 234
+"colorscheme seoul256
+"let g:airline_theme = 'tender'
+"colorscheme tender
+"let g:sonokai_style = 'shusia'
+"let g:airline_theme = 'sonokai'
+"colorscheme sonokai
+"let g:airline_theme = 'onedark'
+"colorscheme onedark
+"colorscheme nord
+if PlugLoaded('gruvbox')
+    let g:airline_theme = 'gruvbox'
+    colorscheme gruvbox
+endif
+
+" Keep visual select
+vmap < <gv
+vmap > >gv
+
+if PlugLoaded('fzf.vim')
+    let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+    nnoremap <silent> <leader>sf :Files<CR>
+
+    " gitgrep popup
+    command! -bang -nargs=* GGrep
+        \ call fzf#vim#grep(
+        \   'git grep --line-number '.shellescape(<q-args>), 0,
+        \   <bang>0 ? fzf#vim#with_preview({'options': '--no-hscroll'}, 'up:60%')
+        \           : fzf#vim#with_preview({'options': '--no-hscroll'}, 'right:50%'),
+        \   <bang>0)
+endif
 
 " show cursorline (always) and cursorcolumn (in active buffer)
 set cursorline
@@ -150,6 +190,33 @@ augroup CursorColumn
     au WinLeave * setlocal nocursorcolumn
 augroup END
 
+" keep the cursor offset 1/4 the screen height while scrolling
+augroup centercursor
+    au!
+    au BufEnter,WinEnter,WinNew *
+        \ let &scrolloff = winheight(0) / 4
+augroup END
+
+if has('nvim')
+    " popup when incremental searching (e.g. :%s/...)
+    set inccommand=split
+
+    " highlight on yank
+    augroup LuaHighlight
+        au!
+        au TextYankPost * silent! lua return (not vim.v.event.visual) and require'vim.highlight'.on_yank()
+    augroup END
+endif
+
+if PlugLoaded('scratch.vim')
+    " In normal mode:
+    "   gs: open scratch buffer and insert
+    " In visual mode:
+    "   gs: copy selection to scratch buffer
+    let g:scratch_autohide = 1
+    let g:scratch_persistence_file = '~/.local/share/nvim/scratch.vim'
+endif
+
 " spell check
 autocmd FileType markdown setlocal spell complete+=kspell
 " In normal mode:
@@ -160,109 +227,145 @@ autocmd FileType markdown setlocal spell complete+=kspell
 " In insert mode:
 "   <C-n> to auto-complete
 
-" Airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
+if PlugLoaded('vim-airline')
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+
+    if !exists('g:airline_symbols')
+      let g:airline_symbols = {}
+    endif
+
+    let g:airline_symbols.space = "\ua0"
+    set laststatus=2
 endif
-let g:airline_symbols.space = "\ua0"
-set laststatus=2
 
-" Indent Guides
-let g:indent_guides_guide_size = 1
-"let g:indent_guides_enable_on_vim_startup = 1
+if PlugLoaded('vim-indent-guides')
+    let g:indent_guides_guide_size = 1
+    "let g:indent_guides_enable_on_vim_startup = 1
+endif
 
-autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+if PlugLoaded('vim-gitgutter')
+    autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
-let g:EditConfig_exec_path='/usr/local/bin/editorconfig'
-let g:EditorConfig_core_mode='external_command'
+    autocmd VimEnter * GitGutterLineNrHighlightsEnable
+endif
 
-autocmd VimEnter * GitGutterLineNrHighlightsEnable
+if PlugLoaded('editorconfig-vim')
+    let g:EditorConfig_exec_path='/usr/bin/editorconfig'
+    let g:EditorConfig_core_mode='external_command'
+endif
 
-" Vifm
-map <Leader>vv :Vifm<CR>
-map <Leader>vs :VsplitVifm<CR>
+if PlugLoaded('vimwiki')
+    let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
+    let g:vimwiki_global_ext = 0
+    "map <Leader>ww :VimwikiIndex<CR>
+    "map <Leader>wi :VimwikiDiaryIndex<CR>
+    "map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
+endif
 
-" VimWiki
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md', 'auto_diary_index': 1}]
-let g:vimwiki_global_ext = 0
-"map <Leader>ww :VimwikiIndex<CR>
-"map <Leader>wi :VimwikiDiaryIndex<CR>
-"map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
+if PlugLoaded('calendar-vim')
+    let g:calendar_monday = 1
+    let g:calendar_weeknm = 1
+endif
 
-" Calendar
-let g:calendar_monday = 1
-let g:calendar_weeknm = 1
+if PlugLoaded('nerdtree')
+    " in normal mode: \nt
+    map <Leader>nt :NERDTreeToggle<CR>
+    " load NERTTree automatically when opening vim (kind of annoying)
+    " autocmd vimenter * NERDTree
+    let g:NERDTreeFileExtensionHighlightFullName = 1
+    let g:NERDTreeExactMatchHighlightFullName = 1
+    let g:NERDTreePatternMatchHighlightFullName = 1
+endif
 
-" NERDtree
-" in normal mode: \nt
-map <Leader>nt :NERDTreeToggle<CR>
-" load NERTTree automatically when opening vim (kind of annoying)
-" autocmd vimenter * NERDTree
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-
-" Mouse scrolling
-set mouse=nicr"
-
-" Keep visual select
-vmap < <gv
-vmap > >gv
-
-" Goyo
-let g:goyo_width = 100
+if PlugLoaded('goyo.vim')
+    let g:goyo_width = 100
+endif
 
 " COC
-if has('nvim')
+if has('nvim') && PlugLoaded('coc.nvim')
+    " Ctrl+Space for completion
     inoremap <silent><expr> <c-space> coc#refresh()
 endif
 
-" Vim Which Key
-nnoremap <silent> <leader> :WhichKey "\\"<CR>
+autocmd BufWritePre *.go :call CocAction("organizeImport")
 
-let g:which_key_use_floating_win = 0
-highlight default link WhichKey Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup Identifier
-highlight default link WhichKeyDesc Function
 
-let g:which_key_map = {}
-let g:which_key_map['z'] = [ 'Goyo', 'zen' ]
-let g:which_key_map.s = {
-    \ 'name': '+search',
-    \ 'f': [ ':Files',      'Files' ],
-    \ 'l': [ ':Lines',      'Lines' ],
-    \ }
-let g:which_key_map.t = {
-    \ 'name': '+terminal',
-    \ ';': [ ':FloatermNew --wintype=normal --height=12',   'Terminal'  ],
-    \ 'g': [ ':FloatermNew lazygit',                        'Git'       ],
-    \ 'd': [ ':FloatermNew lazydocker',                     'Docker'    ],
-    \ }
-let g:which_key_map.g = {
-    \ 'name': 'Go To',
-    \ 'd': [ ":call CocAction('jumpDefinition')", 'Definition' ],
-    \ 'i': [ ":call CocAction('jumpImplementation')", 'Implementation' ],
-    \ 'r': [ ":call CocAction('jumpReferences')", 'References' ],
-    \ }
+if PlugLoaded('nvim-treesitter')
+lua << EOF
+require('nvim-treesitter.configs').setup {
+    ensure_installed = "maintained",
+    highlight = {
+        enable = true,
+    },
+}
+EOF
+endif
 
-call which_key#register('\', "g:which_key_map")
+if PlugLoaded('vim-which-key')
+    nnoremap <silent> <leader> :WhichKey "\\"<CR>
 
-" FZF
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-nnoremap <silent> <leader>sf :Files<CR>
+    let g:which_key_use_floating_win = 0
+    highlight default link WhichKey Operator
+    highlight default link WhichKeySeperator DiffAdded
+    highlight default link WhichKeyGroup Identifier
+    highlight default link WhichKeyDesc Function
 
-" Floaterm
-"
-let g:floaterm_keymap_toggle = '<F1>'
-let g:floaterm_keymap_next   = '<F2>'
-let g:floaterm_keymap_prev   = '<F3>'
-let g:floaterm_keymap_new    = '<F4>'
+    let g:which_key_map = {}
 
-let g:floaterm_wintitle = 0
-let g:floaterm_autoclose = 1
-let g:floaterm_autoinsert = 1
-let g:floaterm_width = 0.8
-let g:floaterm_height = 0.8
+    if PlugLoaded('goyo.vim')
+        let g:which_key_map['z'] = [ 'Goyo', 'zen' ]
+    endif
+
+    if PlugLoaded('fzf.vim')
+    let g:which_key_map.s = {
+            \ 'name': '+fzf',
+            \ 'f': [ ':Files',      'Files'   ],
+            \ 'l': [ ':Lines',      'Lines'   ],
+            \ 'g': [ ':GGrep',      'GitGrep' ],
+            \ 'a': [ ':Ag',         'Grep'    ],
+            \ }
+    endif
+
+    if PlugLoaded('vim-floaterm')
+        let g:which_key_map.t = {
+            \ 'name': '+terminal',
+            \ ';': [ ':FloatermNew --wintype=normal --height=12',   'Terminal'  ],
+            \ 'g': [ ':FloatermNew lazygit',                        'Git'       ],
+            \ 'd': [ ':FloatermNew lazydocker',                     'Docker'    ],
+            \ }
+    endif
+
+    if PlugLoaded('coc.nvim')
+        let g:which_key_map.g = {
+            \ 'name': '+coc',
+            \ 'd': [ ":call CocAction('jumpDefinition')", 'Definition' ],
+            \ 'i': [ ":call CocAction('jumpImplementation')", 'Implementation' ],
+            \ 'r': [ ":call CocAction('jumpReferences')", 'References' ],
+            \ 'o': [ ":CocList outline", 'Outline' ],
+            \ }
+    endif
+
+    if PlugLoaded('vifm.vim')
+        let g:which_key_map.v = {
+            \ 'name': '+vifm',
+            \ 'v': [ ':Vifm', 'Vifm' ],
+            \ 's': [ ':VsplitVifm', 'VsplitVifm' ],
+            \ }
+    endif
+
+    call which_key#register('\', "g:which_key_map")
+endif
+
+if PlugLoaded('vim-floaterm')
+    let g:floaterm_keymap_toggle = '<F1>'
+    let g:floaterm_keymap_next   = '<F2>'
+    let g:floaterm_keymap_prev   = '<F3>'
+    let g:floaterm_keymap_new    = '<F4>'
+
+    let g:floaterm_wintitle = 0
+    let g:floaterm_autoclose = 1
+    let g:floaterm_autoinsert = 1
+    let g:floaterm_width = 0.8
+    let g:floaterm_height = 0.8
+endif
