@@ -20,6 +20,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'godlygeek/tabular'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'mhinz/vim-startify'
+
+Plug 'jiangmiao/auto-pairs'
 
 if has('nvim')
     " code completion
@@ -28,14 +31,20 @@ if has('nvim')
     " echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     " sudo apt update && sudo apt install yarn
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     "Plug 'neoclide/coc.nvim', {'branch': 'master'}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     " :CocInstall coc-snippets
     Plug 'honza/vim-snippets'
 
     " Better syntax highlighting
     Plug 'nvim-treesitter/nvim-treesitter'
 endif
+
+" Cheatsheet
+Plug 'dbeniamine/cheat.sh-vim'
+
+" LLVM
+Plug 'rhysd/vim-llvm'
 
 " Go
 Plug 'fatih/vim-go'
@@ -47,11 +56,12 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " colorthemes
 "Plug 'tomasr/molokai'
 "Plug 'junegunn/seoul256.vim'
-"Plug 'jacoborus/tender.vim'
 "Plug 'sainnhe/sonokai'
 "Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
 "Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
+"Plug 'rakr/vim-one'
+"Plug 'NLKNguyen/papercolor-theme'
 
 " :Goyo to remove distractions
 Plug 'junegunn/goyo.vim'
@@ -105,7 +115,6 @@ endif
 set t_Co=256
 set encoding=utf-8
 set backspace=indent,eol,start
-set backup
 set diffexpr=MyDiff()
 set display=truncate
 set guifont=Ubuntu_Mono_derivative_Powerlin:h10:cANSI:qDRAFT
@@ -132,7 +141,7 @@ set whichwrap=b,s,<,>,[,]
 set wildmenu
 set number
 syntax on
-set clipboard=unnamed
+set clipboard=unnamedplus
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -140,6 +149,9 @@ set expandtab
 set smartindent
 set nobackup
 set nowritebackup
+set cmdheight=2
+set splitbelow splitright
+
 " hide unsaved buffers instead of closing them
 set hidden
 " Mouse scrolling
@@ -147,20 +159,55 @@ set mouse=nicr"
 
 
 set background=dark
-"colorscheme molokai
-"let g:seoul256_background = 234
-"colorscheme seoul256
-"let g:airline_theme = 'tender'
-"colorscheme tender
-"let g:sonokai_style = 'shusia'
-"let g:airline_theme = 'sonokai'
-"colorscheme sonokai
-"let g:airline_theme = 'onedark'
-"colorscheme onedark
-"colorscheme nord
+
+if PlugLoaded('vim-one')
+    let g:airline_theme = 'one'
+    colorscheme one
+endif
+
+if PlugLoaded('molokai')
+    let g:airline_theme = 'molokai'
+    colorscheme molokai
+endif
+
+if PlugLoaded('seoul256.vim')
+    let g:seoul256_background = 234
+    let g:airline_theme = 'seoul256'
+    colorscheme seoul256
+endif
+
+if PlugLoaded('sonokai')
+    let g:sonokai_style = 'shusia'
+    let g:airline_theme = 'sonokai'
+    colorscheme sonokai
+endif
+
+if PlugLoaded('onedark.vim')
+    let g:airline_theme = 'onedark'
+    colorscheme onedark
+endif
+
+if PlugLoaded('nord-vim')
+    let g:airline_theme = 'nord'
+    colorscheme nord
+endif
+
 if PlugLoaded('gruvbox')
     let g:airline_theme = 'gruvbox'
     colorscheme gruvbox
+endif
+
+if PlugLoaded('papercolor-theme')
+    let g:airline_theme='papercolor'
+    let g:PaperColor_Theme_Options = {
+        \   'theme': {
+        \       'default': {
+        \           'transparent_background': 1,
+        \           'allow_bold': 1
+        \       }
+        \   }
+        \ }
+    colorscheme PaperColor
 endif
 
 " Keep visual select
@@ -248,6 +295,9 @@ if PlugLoaded('vim-gitgutter')
     autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
     autocmd VimEnter * GitGutterLineNrHighlightsEnable
+
+    " update more quickly (in ms)
+    set updatetime=500
 endif
 
 if PlugLoaded('editorconfig-vim')
@@ -284,12 +334,27 @@ endif
 
 " COC
 if has('nvim') && PlugLoaded('coc.nvim')
+    set updatetime=300
+    set shortmess+=c
+    set signcolumn=yes
+
     " Ctrl+Space for completion
-    inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <C-space> coc#refresh()
+
+    autocmd BufWritePre *.go :call CocAction("organizeImport")
+
+    function! s:show_documentation()
+        if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+        elseif (coc#rpc#ready())
+            call CocActionAsync('doHover')
+        else
+            execute '!' . &keywordprg . " " . expand('<cword>')
+        endif
+    endfunction
+
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
 endif
-
-autocmd BufWritePre *.go :call CocAction("organizeImport")
-
 
 if PlugLoaded('nvim-treesitter')
 lua << EOF
@@ -318,12 +383,13 @@ if PlugLoaded('vim-which-key')
     endif
 
     if PlugLoaded('fzf.vim')
-    let g:which_key_map.s = {
+        let g:which_key_map.s = {
             \ 'name': '+fzf',
             \ 'f': [ ':Files',      'Files'   ],
             \ 'l': [ ':Lines',      'Lines'   ],
             \ 'g': [ ':GGrep',      'GitGrep' ],
             \ 'a': [ ':Ag',         'Grep'    ],
+            \ 'b': [ ':Buffers',    'Buffers' ],
             \ }
     endif
 
@@ -338,11 +404,18 @@ if PlugLoaded('vim-which-key')
 
     if PlugLoaded('coc.nvim')
         let g:which_key_map.g = {
-            \ 'name': '+coc',
+            \ 'name': '+goto',
             \ 'd': [ ":call CocAction('jumpDefinition')", 'Definition' ],
             \ 'i': [ ":call CocAction('jumpImplementation')", 'Implementation' ],
             \ 'r': [ ":call CocAction('jumpReferences')", 'References' ],
             \ 'o': [ ":CocList outline", 'Outline' ],
+            \ 'D': [ ":GoDoc", 'Documentation' ],
+            \ 't': [ ":GoAlternate!", 'Switch Code/Test' ],
+            \ }
+        let g:which_key_map.r = {
+            \ 'name': '+refactor',
+            \ 'f': [ "<Plug><coc-format-selected)", 'Format' ],
+            \ 'n': [ "<Plug>(coc-rename)", 'Rename' ],
             \ }
     endif
 
@@ -369,3 +442,4 @@ if PlugLoaded('vim-floaterm')
     let g:floaterm_width = 0.8
     let g:floaterm_height = 0.8
 endif
+

@@ -3,10 +3,22 @@
     "snippets.userSnippetsDirectory": "~/.config/nvim/snips",
     "suggest.floatEnable": true,
     "coc.preferences.hoverTarget": "float",
+    "signature.enable": true,
+    "signature.target": "float",
     "codeLens.enable": true,
     "diagnostic.virtualText": true,
+
     "go.goplsOptions": {
         "hoverKind": "FullDocumentation",
-        "completionDocumentation": true
+        "completionDocumentation": true,
+        "usePlaceholders": true
+    },
+
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod", ".vim/", ".git/"],
+            "filetypes": ["go"]
+        }
     }
 }
