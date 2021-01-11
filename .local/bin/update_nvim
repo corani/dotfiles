@@ -1,3 +1,13 @@
 #!/bin/bash
-curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage > ~/.local/bin/nvim.appimage
-chmod u+x ~/.local/bin/nvim.appimage
+#URL=https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+URL=https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
+FILE=~/.local/bin/nvim.appimage
+
+CODE=`curl -Lsi -o /dev/null -w "%{http_code}" "${URL}"`
+
+if [[ "${CODE}" == "200" ]]; then
+    curl -L -o "${FILE}" "${URL}"
+    chmod u+x "${FILE}"
+else
+    echo "Status: ${CODE}"
+fi
