@@ -2,12 +2,29 @@
 #URL=https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 URL=https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
 FILE=~/.local/bin/nvim.appimage
+PREV="${FILE}.previous"
 
+echo -n "Check availability: "
 CODE=`curl -Lsi -o /dev/null -w "%{http_code}" "${URL}"`
+echo "done (${CODE})"
 
-if [[ "${CODE}" == "200" ]]; then
-    curl -L -o "${FILE}" "${URL}"
+if [ ${CODE} != 200 ]; then
+    exit 1
+fi
+
+cp -f "${FILE}" "${PREV}"
+
+echo -n "Updating: "
+curl -Ls -o "${FILE}" "${URL}"
+CODE=$?
+echo "done (${CODE})"
+
+if [ ${CODE} == 0 ]; then
     chmod u+x "${FILE}"
-else
-    echo "Status: ${CODE}"
+
+    echo "Previous: `${PREV} --version | head -1`"
+    echo "Updated:  `${FILE} --version | head -1`"
+elif [ ${CODE} == 23 ]; then
+    echo "File busy, did you quit?"
+    ps waux | grep nvim.appimage | grep -v grep
 fi

@@ -1,0 +1,15 @@
+#!/bin/bash
+CURRENT=$(gitui --version | cut -d' ' -f2)
+LATEST=$(curl --silent https://github.com/extrawurst/gitui/releases/latest \
+        | tr -d '"' | sed 's/^.*tag\///g' | sed 's/>.*$//g' | sed 's/^v//')
+
+if [ "${CURRENT}" != "${LATEST}" ]; then
+    wget https://github.com/extrawurst/gitui/releases/download/v${LATEST}/gitui-linux-musl.tar.gz -O- -q \
+        | tar -zxf - -C ~/.local/bin/
+
+    echo "Previous: ${CURRENT}"
+    echo "Current:  ${LATEST}"
+else
+    echo "No new version found"
+    echo "Current:  ${LATEST}"
+fi
