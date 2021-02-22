@@ -81,6 +81,7 @@ Plug 'vifm/vifm.vim'
 Plug 'dhruvasagar/vim-table-mode'
 
 Plug 'vimwiki/vimwiki'
+Plug 'tbabej/taskwiki'
 Plug 'mattn/calendar-vim'
 
 " Nerdtree
