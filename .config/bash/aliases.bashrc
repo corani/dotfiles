@@ -50,3 +50,6 @@ alias cat=bat
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 
 export TASKRC=~/.config/taskwarrior/taskrc
+
+# Set "nvim" as manpager
+export MANPAGER="nvim -c 'set ft=man' -"
