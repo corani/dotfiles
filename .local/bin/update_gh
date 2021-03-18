@@ -1,0 +1,16 @@
+#!/bin/bash
+CURRENT="$(gh --version | head -1 | cut -d' ' -f3)"
+LATEST=$(curl --silent https://github.com/cli/cli/releases/latest \
+        | tr -d '"' | sed 's/^.*tag\///g' | sed 's/>.*$//g' | sed 's/^v//')
+
+if [ "${CURRENT}" != "${LATEST}" ]; then
+    wget https://github.com/cli/cli/releases/download/v${LATEST}/gh_${LATEST}_linux_amd64.deb \
+        -O /tmp/gh_${LATEST}_linux_amd64.deb -q
+    sudo dpkg -i /tmp/gh_${LATEST}_linux_amd64.deb
+
+    echo "Previous: ${CURRENT}"
+    echo "Current:  ${LATEST}"
+else
+    echo "No new version found"
+    echo "Current:  ${LATEST}"
+fi
