@@ -86,5 +86,11 @@ if [ -f ~/.config/fortune/stoic ]; then
     fortune ~/.config/fortune/ | cowthink -W 60
 fi
 
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -s)
+    trap "kill $SSH_AGENT_PID" 0
+    ssh-add ~/.ssh/id_rsa
+fi
+
 # bash vim mode
 set -o vi
