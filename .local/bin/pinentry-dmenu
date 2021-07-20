@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo 'OK Pleased to meet you'
+
+while read stdin; do
+    echo $stdin >> /tmp/pinentry-dmenu
+	case $stdin in
+		*BYE*) break ;;
+		*SETDESC*) KEYNAME=${stdin#*:%0A%22}; KEYNAME=${KEYNAME%\%22\%0A*}; KEYID=${stdin#*ID }; KEYID=${KEYID%,*}; echo OK ;;
+		*GETPIN*) echo "D `echo | DISPLAY=:1 dmenu -p "gpg-agent: $KEYNAME ($KEYID)" -nf "black" -nb "black" `\nOK" ;;
+		*) echo OK
+	esac
+done

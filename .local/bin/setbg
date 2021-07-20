@@ -1,0 +1,15 @@
+#!/bin/bash
+pushd ~/Pictures/Wallpapers/ > /dev/null
+
+PICK=$(find . -type f | fzf)
+if [ "${PICK}" != "" ]; then
+    PICK=$(basename "${PICK}")
+
+    rm -f current.jpg && ln -s "${PICK}" current.jpg
+
+    notify-send --icon "$(pwd)/${PICK}" "set background" "${PICK}"
+
+    feh --bg-scale current.jpg
+fi
+
+popd > /dev/null
