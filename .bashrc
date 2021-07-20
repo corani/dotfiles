@@ -86,9 +86,16 @@ if [ -f ~/.config/fortune/stoic ]; then
     fortune ~/.config/fortune/ | cowthink -W 60
 fi
 
-if [ -z "$SSH_AUTH_SOCK" ]; then
+# if we can't connect to the ssh-agent (not running, or not owned by us), start a new one.
+ssh-add -l > /dev/null 2>&1
+if [ $? -ne 0 ]; then
     eval $(ssh-agent -s)
     trap "kill $SSH_AGENT_PID" 0
+fi
+
+# check whether our ssh-key is loaded, to avoid unnecessarily having to unlock it.
+loaded=$(ssh-add -l | grep "$(realpath ~/.ssh/id_rsa)" | wc -l)
+if [ "${loaded}" -eq "0" ]; then
     ssh-add ~/.ssh/id_rsa
 fi
 

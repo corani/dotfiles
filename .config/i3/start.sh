@@ -11,3 +11,4 @@ fi
 ~/.config/polybar/launch.sh
 ~/.config/i3/fehbg
 dunst &
+picom &

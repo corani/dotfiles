@@ -53,6 +53,9 @@ bindsym $mod+d exec "dmenu_run -fn 'Cascadia Code PL:pixelsize=13'"
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+# start passmenu (a dmenu like wrapper for pass)
+bindsym $mod+p exec "passmenu"
+
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -96,6 +99,12 @@ bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# make the current window a scratchpad (and hide)
+bindsym $mod+Shift+minus move scratchpad
+
+# show the first scratchpad window
+bindsym $mod+minus scratchpad show
 
 # focus the parent container
 bindsym $mod+a focus parent

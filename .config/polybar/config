@@ -279,10 +279,10 @@ interval = 5
 date =
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
+time = "%a %H:%M"
 time-alt = %H:%M:%S
 
-format-prefix = NOW
+format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.normal-white}
 
