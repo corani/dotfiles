@@ -43,6 +43,8 @@ if has("nvim")
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'glepnir/lspsaga.nvim'
     Plug 'folke/which-key.nvim'
+    Plug 'folke/todo-comments.nvim'
+    Plug 'folke/trouble.nvim'
 endif
 
 call plug#end()

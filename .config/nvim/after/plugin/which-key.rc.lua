@@ -24,5 +24,6 @@ wk.register({
         a = { "<cmd>Telescope live_grep<cr>", "live" },
         b = { "<cmd>Telescope buffers<cr>", "buffer" },
         h = { "<cmd>Telescope help_tags<cr>", "help" }
-    }
+    },
+    z = { "<cmd>Goyo<cr>", "zen" }
 }, { prefix = "<leader>" })

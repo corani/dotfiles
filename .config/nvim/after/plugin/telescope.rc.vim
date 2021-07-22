@@ -8,7 +8,8 @@ require('telescope').setup{
   defaults = {
     mappings = {
       n = {
-        ["q"] = actions.close
+        ["q"] = actions.close,
+        ["f"] = actions.send_to_qflist
       },
     },
   }
