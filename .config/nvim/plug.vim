@@ -30,8 +30,6 @@ Plug 'morhetz/gruvbox'
 Plug 'mzlogin/vim-markdown-toc'
 Plug 'terryma/vim-multiple-cursors'
 
-Plug 'liuchengxu/vim-which-key'
-
 if has("nvim")
     Plug 'hoob3rt/lualine.nvim'
     Plug 'kyazdani42/nvim-tree.lua'
@@ -44,6 +42,7 @@ if has("nvim")
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'glepnir/lspsaga.nvim'
+    Plug 'folke/which-key.nvim'
 endif
 
 call plug#end()

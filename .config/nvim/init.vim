@@ -25,6 +25,7 @@ set expandtab
 set shell=bash
 set backupskip=/tmp/*
 set history=200
+set timeoutlen=500
 
 set ruler
 set scrolloff=5
