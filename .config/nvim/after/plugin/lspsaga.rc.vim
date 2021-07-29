@@ -20,5 +20,5 @@ nnoremap <silent><leader>gK <Cmd>Lspsaga hover_doc<CR>
 nnoremap <silent><leader>gh <Cmd>Lspsaga lsp_finder<CR>
 nnoremap <silent><leader>gp <Cmd>Lspsaga preview_definition<CR>
 
-nnoremap <silent><leader>ga <Cmd>Lspsaga code_action<CR>
+"nnoremap <silent><leader>ga <Cmd>Lspsaga code_action<CR>
 nnoremap <silent><leader>rn <Cmd>Lspsaga rename<CR>

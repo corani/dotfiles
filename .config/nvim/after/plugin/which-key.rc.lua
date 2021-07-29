@@ -4,13 +4,21 @@ wk.register({
     g = {
         name = "+goto",
         t = { "<cmd>GoAlternate!<cr>", "toggle test" },
-        a = "code action",
-        d = "definition",
+        a = { "<cmd>Telescope lsp_code_actions<cr>", "code actions" },
+        A = { "<cmd>Telescope lsp_range_code_actions<cr>", "code actions" },
+        d = { "<cmd>Telescope lsp_definitions<cr>", "definition" },
         D = "declaration",
-        i = "implementation",
-        h = "references",
+        e = { "<cmd>Telescope lsp_document_diagnostics", "diagnostics" },
+        i = { "<cmd>Telescope lsp_implementations<cr>", "implementations" },
+        r = { "<cmd>Telescope lsp_references<cr>", "references" },
+        s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols" },
         K = "documentation",
         p = "preview"
+    },
+    G = {
+        name = "+git",
+        b = { "<cmd>Telescope git_branches<cr>", "branches" },
+        c = { "<cmd>Telescope git_commits<cr>", "commits" }
     },
     r = {
         name = "+refactor",

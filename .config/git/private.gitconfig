@@ -1,0 +1,15 @@
+# vi: ft=gitconfig
+[user]
+	name = Daniel Bos
+    email = daniel.bos@sap.com
+
+[url "git+ssh://git@github.wdf.sap.corp"]
+    insteadOf = https://github.wdf.sap.corp
+
+[url "git+ssh://git@github.com/golang/"]
+    insteadOf = https://golang.org/x/"]"
+
+[http]
+[http "https://github.com"]
+    proxy = socks5://10.236.6.120:1080
+

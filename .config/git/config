@@ -30,5 +30,9 @@
 
 [include]
     path = private.gitconfig
+
 [init]
-	defaultBranch = master
+    defaultBranch = master
+
+[gpg]
+	program = /usr/bin/gpg
