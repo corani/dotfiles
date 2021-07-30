@@ -33,5 +33,10 @@ wk.register({
         b = { "<cmd>Telescope buffers<cr>", "buffer" },
         h = { "<cmd>Telescope help_tags<cr>", "help" }
     },
+    j = {
+        name = "+jump",
+        l = { "<cmd>lua require'hop'.hint_lines()<cr>", "line" },
+        w = { "<cmd>lua require'hop'.hint_words()<cr>", "word" },
+    },
     z = { "<cmd>Goyo<cr>", "zen" }
 }, { prefix = "<leader>" })

@@ -43,6 +43,8 @@ if has("nvim")
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-github.nvim'
+    Plug 'hrsh7th/nvim-compe'
+    Plug 'phaazon/hop.nvim'
     Plug 'glepnir/lspsaga.nvim'
     Plug 'folke/which-key.nvim'
     Plug 'folke/todo-comments.nvim'
