@@ -1,0 +1,6 @@
+#!/bin/bash
+pushd ~/Pictures/Wallpapers/ > /dev/null
+
+feh --image-bg=black --thumbnails -P --index-info "" -y 128 -E 128 -A "rm -f current.jpg && ln -s \"%n\" current.jpg; notify-send --icon \"$(pwd)/%n\" \"set background\" \"%n\"; feh --bg-scale current.jpg" $(find . -type f ! -name current.jpg)
+
+popd > /dev/null
