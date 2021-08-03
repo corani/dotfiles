@@ -49,6 +49,10 @@ if has("nvim")
     Plug 'folke/which-key.nvim'
     Plug 'folke/todo-comments.nvim'
     Plug 'folke/trouble.nvim'
+    Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'wfxr/minimap.vim'
+    Plug 'oberblastmeister/neuron.nvim', { 'branch': 'unstable' }
 endif
 
 call plug#end()
