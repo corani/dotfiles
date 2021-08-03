@@ -45,13 +45,15 @@ wk.register({
     },
     n = {
         name = "+neuron",
+        i = { "<cmd>lua require'neuron'.goto_index()<cr>", "index" },
         o = { "<cmd>lua require'neuron'.enter_link()<cr>", "open link" },
         n = { "<cmd>lua require'neuron/cmd'.new_edit(require'neuron/config'.neuron_dir)<cr>", "new note" },
         f = { "<cmd>lua require'neuron/telescope'.find_zettels()<cr>", "find note" },
         F = { "<cmd>lua require'neuron/telescope'.find_zettels {insert=true}<cr>", "insert link" },
-        b = { "<cmd>lua require'neuron/telescope'.find_backlinks()<cr>", "backlink" },
+        b = { "<cmd>lua require'neuron/telescope'.find_backlinks()<cr>", "backlinks" },
         B = { "<cmd>lua require'neuron/telescope'.find_backlinks {insert=true}<cr>", "insert backlink" },
-        i = { "<cmd>lua require'neuron'.goto_index()<cr>", "index" },
+        t = { "<cmd>Telescope live_grep<cr>", "tags" },
+        T = { "<cmd>lua require'neuron/telescope'.find_tags()<cr>", "insert tag" },
     },
     z = { "<cmd>Goyo<cr>", "zen" }
 }, { prefix = "<leader>" })
