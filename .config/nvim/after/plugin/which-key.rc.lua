@@ -15,6 +15,15 @@ wk.register({
         K = "documentation",
         p = "preview"
     },
+    h = {
+        name = "+gitsigns",
+        b = "blame line",
+        s = "stage hunk",
+        u = "unstage hunk",
+        r = "reset hunk",
+        R = "reset buffer",
+        p = "preview hunk",
+    },
     G = {
         name = "+git",
         b = { "<cmd>Telescope git_branches<cr>", "branches" },

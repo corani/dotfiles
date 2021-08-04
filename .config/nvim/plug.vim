@@ -15,7 +15,6 @@ Plug 'junegunn/vim-plug'
 Plug 'junegunn/goyo.vim'
 
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 
 " auto-close parenthesis
 Plug 'cohama/lexima.vim'
@@ -53,6 +52,7 @@ if has("nvim")
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'wfxr/minimap.vim'
     Plug 'oberblastmeister/neuron.nvim', { 'branch': 'unstable' }
+    Plug 'lewis6991/gitsigns.nvim'
 endif
 
 call plug#end()
