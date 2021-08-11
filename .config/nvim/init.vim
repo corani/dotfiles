@@ -26,6 +26,9 @@ set shell=bash
 set backupskip=/tmp/*
 set history=200
 set timeoutlen=500
+set clipboard=unnamedplus
+set cmdheight=2
+set splitbelow splitright
 
 set ruler
 set scrolloff=5

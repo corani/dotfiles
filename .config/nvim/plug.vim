@@ -14,6 +14,10 @@ call plug#begin()
 Plug 'junegunn/vim-plug'
 Plug 'junegunn/goyo.vim'
 
+Plug 'mhinz/vim-startify'
+Plug 'mzlogin/vim-markdown-toc'
+Plug 'terryma/vim-multiple-cursors'
+
 Plug 'tpope/vim-fugitive'
 
 " auto-close parenthesis
