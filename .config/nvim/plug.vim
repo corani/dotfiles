@@ -55,7 +55,6 @@ if has("nvim")
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'wfxr/minimap.vim'
-    Plug 'oberblastmeister/neuron.nvim', { 'branch': 'unstable' }
     Plug 'lewis6991/gitsigns.nvim'
 endif
 
