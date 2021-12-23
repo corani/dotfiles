@@ -7,7 +7,9 @@ scriptencoding utf-8
 if !1 | finish | endif
 
 set nocompatible
+set relativenumber
 set number
+set number relativenumber
 syntax enable
 set fileencodings=utf-8
 set encoding=utf-8
@@ -66,7 +68,7 @@ set tabstop=4
 set ai "Auto indent
 set si "Smart indent
 set nowrap "No Wrap lines
-set backspace=start,eol,indent
+set backspace=indent,eol,start
 " Finding files - Search down into subfolders
 set path+=**
 set wildignore+=*/node_modules/*
@@ -95,6 +97,10 @@ if &term =~ "screen"
   autocmd BufEnter * if bufname("") !~ "^?[A-Za-z0-9?]*://" | silent! exe '!echo -n "\ek[`hostname`:`basename $PWD`/`basename %`]\e\\"' | endif
   autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
 endif
+
+" Remember position between restarts
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent! loadview
 
 " show cursorline (always) and cursorcolumn (in active buffer)
 set cursorline
@@ -155,6 +161,9 @@ if exists("&termguicolors") && exists("&winblend")
   set background=dark
   colorscheme gruvbox
 endif
+
+" transparent background
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
 set exrc
 

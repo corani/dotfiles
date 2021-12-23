@@ -53,3 +53,5 @@ export TASKRC=~/.config/taskwarrior/taskrc
 
 # Set "nvim" as manpager
 export MANPAGER="nvim -c 'set ft=man' -"
+
+alias icat="kitty +kitten icat"

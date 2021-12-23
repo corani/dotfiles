@@ -11,7 +11,7 @@ wk.register({
         i = { "<cmd>Telescope lsp_implementations<cr>", "implementations" },
         r = { "<cmd>Telescope lsp_references<cr>", "references" },
         s = { "<cmd>Telescope lsp_document_symbols<cr>", "symbols" },
-        K = "documentation",
+        K = { "<cmd>lua vim.lsp.buf.hover()<cr>", "documentation" },
         p = "preview"
     },
     h = {
@@ -26,7 +26,9 @@ wk.register({
     G = {
         name = "+git",
         b = { "<cmd>Telescope git_branches<cr>", "branches" },
-        c = { "<cmd>Telescope git_commits<cr>", "commits" }
+        c = { "<cmd>Telescope git_commits<cr>", "commits" },
+        w = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "worktrees" },
+        W = { "<cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<cr>", "create worktree" }
     },
     r = {
         name = "+refactor",
@@ -41,18 +43,20 @@ wk.register({
         b = { "<cmd>Telescope buffers<cr>", "buffer" },
         h = { "<cmd>Telescope help_tags<cr>", "help" }
     },
-    j = {
-        name = "+jump",
-        l = { "<cmd>lua require'hop'.hint_lines()<cr>", "line" },
-        w = { "<cmd>lua require'hop'.hint_words()<cr>", "word" },
-    },
     s = {
         name = "+show",
         a = { "<cmd>Telescope lsp_code_actions<cr>", "code actions" },
+        b = { "<cmd>lua require('nvim-biscuits').toggle_biscuits()<cr>", "biscuits" },
         A = { "<cmd>Telescope lsp_range_code_actions<cr>", "range code actions" },
         m = { "<cmd>MinimapToggle<cr>",  "minimap" },
         f = { "<cmd>NvimTreeToggle<cr>", "file tree" },
         t = { "<cmd>LspTroubleToggle<cr>", "trouble" },
+        c = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "clipboard" },
+        p = { "<cmd>Telescope projects<cr>", "projects" },
     },
-    z = { "<cmd>Goyo<cr>", "zen" }
+    z = { 
+        name = "+zen",
+        t = { "<cmd>Twilight<cr>", "twilight" },
+        z = { "<cmd>ZenMode<cr>", "zen" },
+    },
 }, { prefix = "<leader>" })

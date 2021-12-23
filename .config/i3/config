@@ -19,6 +19,7 @@ gaps outer 5
 # Notifications
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Alacritty Notification"] floating enable
+for_window [title="Kitty Notification"] floating enable
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -42,7 +43,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill

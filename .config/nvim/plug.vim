@@ -12,7 +12,6 @@ endif
 call plug#begin()
 
 Plug 'junegunn/vim-plug'
-Plug 'junegunn/goyo.vim'
 
 Plug 'mhinz/vim-startify'
 Plug 'mzlogin/vim-markdown-toc'
@@ -29,9 +28,7 @@ Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'morhetz/gruvbox'
-
-Plug 'mzlogin/vim-markdown-toc'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'sainnhe/gruvbox-material'
 
 if has("nvim")
     Plug 'hoob3rt/lualine.nvim'
@@ -47,15 +44,25 @@ if has("nvim")
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-github.nvim'
     Plug 'hrsh7th/nvim-compe'
-    Plug 'phaazon/hop.nvim'
-    Plug 'glepnir/lspsaga.nvim'
+    "Plug 'glepnir/lspsaga.nvim'
+    Plug 'tami5/lspsaga.nvim'
     Plug 'folke/which-key.nvim'
     Plug 'folke/todo-comments.nvim'
     Plug 'folke/trouble.nvim'
+    Plug 'folke/zen-mode.nvim'
+    Plug 'folke/twilight.nvim'
     Plug 'akinsho/nvim-bufferline.lua'
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'wfxr/minimap.vim'
+
+    Plug 'ThePrimeagen/git-worktree.nvim'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'rcarriga/nvim-notify'
+    Plug 'ggandor/lightspeed.nvim'
+    Plug 'terrortylor/nvim-comment'
+    Plug 'code-biscuits/nvim-biscuits'
+    Plug 'AckslD/nvim-neoclip.lua'
+    Plug 'ahmedkhalf/project.nvim'
 endif
 
 call plug#end()
