@@ -14,3 +14,4 @@ export CCACHE_CONFIGPATH="$XDG_CONFIG_HOME"/ccache/config
 export CCACHE_DIR="$XDG_CACHE_HOME"/ccache
 
 export K9SCONFIG="$XDG_CONFIG_HOME"/k9s
+export CURL_HOME="$XDG_CONFIG_HOME"/curl

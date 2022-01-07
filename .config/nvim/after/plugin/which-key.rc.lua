@@ -50,9 +50,10 @@ wk.register({
         A = { "<cmd>Telescope lsp_range_code_actions<cr>", "range code actions" },
         m = { "<cmd>MinimapToggle<cr>",  "minimap" },
         f = { "<cmd>NvimTreeToggle<cr>", "file tree" },
-        t = { "<cmd>LspTroubleToggle<cr>", "trouble" },
+        t = { "<cmd>TroubleToggle<cr>", "trouble" },
         c = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "clipboard" },
         p = { "<cmd>Telescope projects<cr>", "projects" },
+        v = { "<cmd>Vista<cr>", "vista" },
     },
     z = { 
         name = "+zen",

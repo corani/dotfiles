@@ -82,6 +82,8 @@ set formatoptions+=r
 set cursorline
 "set cursorcolumn
 
+highlight Normal guibg=#282828
+
 " Set cursor line color on visual mode
 highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 
@@ -161,9 +163,6 @@ if exists("&termguicolors") && exists("&winblend")
   set background=dark
   colorscheme gruvbox
 endif
-
-" transparent background
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 
 set exrc
 

@@ -28,7 +28,6 @@ Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'morhetz/gruvbox'
-Plug 'sainnhe/gruvbox-material'
 
 if has("nvim")
     Plug 'hoob3rt/lualine.nvim'
@@ -44,7 +43,6 @@ if has("nvim")
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-github.nvim'
     Plug 'hrsh7th/nvim-compe'
-    "Plug 'glepnir/lspsaga.nvim'
     Plug 'tami5/lspsaga.nvim'
     Plug 'folke/which-key.nvim'
     Plug 'folke/todo-comments.nvim'
@@ -52,6 +50,7 @@ if has("nvim")
     Plug 'folke/zen-mode.nvim'
     Plug 'folke/twilight.nvim'
     Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'akinsho/toggleterm.nvim'
     Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'wfxr/minimap.vim'
 
@@ -63,6 +62,8 @@ if has("nvim")
     Plug 'code-biscuits/nvim-biscuits'
     Plug 'AckslD/nvim-neoclip.lua'
     Plug 'ahmedkhalf/project.nvim'
+    Plug 'liuchengxu/vista.vim'
+    Plug 'blackCauldron7/surround.nvim'
 endif
 
 call plug#end()
