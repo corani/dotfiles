@@ -28,6 +28,7 @@ Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 
 if has("nvim")
     Plug 'hoob3rt/lualine.nvim'
@@ -58,7 +59,8 @@ if has("nvim")
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'rcarriga/nvim-notify'
     Plug 'ggandor/lightspeed.nvim'
-    Plug 'terrortylor/nvim-comment'
+    " Plug 'terrortylor/nvim-comment'
+    Plug 'numtostr/comment.nvim'
     Plug 'code-biscuits/nvim-biscuits'
     Plug 'AckslD/nvim-neoclip.lua'
     Plug 'ahmedkhalf/project.nvim'
