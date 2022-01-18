@@ -2,11 +2,10 @@
 
 #export TERM=screen-256color
 
-#export GOPROXY=http://10.236.6.120:3456
 export GOPROXY=https://int.repositories.cloud.sap/artifactory/goproxy-virtual
 export GONOSUMDB="*"
 export GOPRIVATE="github.wdf.sap.corp/*,github.tools.sap/*"
-export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:/usr/local/bin:/opt/riscv/bin:$HOME/.nix-profile/bin:$PATH
+export PATH=$GOPATH/bin:$HOME/.local/bin:/usr/local/bin:/opt/riscv/bin:$HOME/.nix-profile/bin:$PATH
 export CDPATH=.:~:$GOPATH/src/github.wdf.sap.corp/velocity:$GOPATH/src/github.wdf.sap.corp/abap-agent
 
 source <(kubectl completion bash)

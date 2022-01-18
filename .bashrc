@@ -105,3 +105,7 @@ set -o vi
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+command -v direnv > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    eval "$(direnv hook bash)"
+fi

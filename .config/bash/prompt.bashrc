@@ -10,12 +10,54 @@ xterm-color|*-256color)
     ;;
 esac
 
-command -v powerline-daemon > /dev/null 2>&1
-if [ $? -ne 1 ]; then
-    powerline-daemon --quiet --replace
-    export POWERLINE_BASH_CONTINUATION=1
-    export POWERLINE_BASH_SELECT=1
-    source $(pip show powerline-status | grep Location | cut -d':' -f2)/powerline/bindings/bash/powerline.sh
+function fromhex() {   
+    hex=$1;   
+    if [[ $hex == "#"* ]]; then     
+        hex=$(echo $1 | awk '{print substr($0,2)}');   
+    fi;   
+    r=$(printf '0x%0.2s' "$hex");   
+    g=$(printf '0x%0.2s' ${hex#??});   
+    b=$(printf '0x%0.2s' ${hex#????});   
+    echo -e `printf "%d;%d;%d" "$r" "$g" "$b"`; 
+}
+
+if [ -f ~/.config/bash/trueline.sh ]; then
+    # Colors taken from github.com/morhetz/gruvbox dark palette
+    declare -A TRUELINE_COLORS=(
+        [black]=$(fromhex "#282828")
+        [dark_grey]=$(fromhex "#3c3836")
+        [cursor_grey]=$(fromhex "#504945")
+        [green]=$(fromhex "#98971a")
+        [grey]=$(fromhex "#a89984")
+        [light_blue]=$(fromhex "#83a598")
+        [mono]=$(fromhex "#ebdbb2")
+        [orange]=$(fromhex "#d65d0e")
+        [red]=$(fromhex "#cc241d")
+        [special_grey]=$(fromhex "#665c54")
+        [white]=$(fromhex "#fbf1c7")
+        [yellow]=$(fromhex "#fabd2f")
+        [aqua]=$(fromhex "#8ec07c")
+    )
+
+    declare -a TRUELINE_SEGMENTS=(
+        'user,black,yellow,bold'
+        'working_dir,mono,dark_grey,normal'
+        'git,mono,special_grey,normal'
+        'exit_status,black,orange,bold'
+        'cmd_duration,black,light_blue,bold'
+        'newline,aqua,dark_grey,bold'
+    )
+
+    declare -A TRUELINE_SYMBOLS=(
+        [working_dir_folder]='...'
+        [working_dir_separator]='/'
+        [working_dir_home]='~'
+        [newline]=' $'
+    )
+
+    TRUELINE_WORKING_DIR_SPACE_BETWEEN_PATH_SEPARATOR=false
+
+    source ~/.config/bash/trueline.sh
 else
     # set variable identifying the chroot you work in (used in the prompt below)
     if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
