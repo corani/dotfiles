@@ -53,10 +53,11 @@ wk.register({
         t = { "<cmd>TroubleToggle<cr>", "trouble" },
         c = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "clipboard" },
         p = { "<cmd>Telescope projects<cr>", "projects" },
-        v = { "<cmd>Vista<cr>", "vista" },
+        v = { "<cmd>Vista!!<cr>", "vista" },
     },
     z = { 
         name = "+zen",
+        s = "shade",
         t = { "<cmd>Twilight<cr>", "twilight" },
         z = { "<cmd>ZenMode<cr>", "zen" },
     },

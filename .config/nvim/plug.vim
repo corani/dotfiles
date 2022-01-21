@@ -65,6 +65,7 @@ if has("nvim")
     Plug 'AckslD/nvim-neoclip.lua'
     Plug 'ahmedkhalf/project.nvim'
     Plug 'liuchengxu/vista.vim'
+    Plug 'sunjon/shade.nvim'
     Plug 'blackCauldron7/surround.nvim'
 endif
 
