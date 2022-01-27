@@ -24,9 +24,6 @@ Plug 'cohama/lexima.vim'
 
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'fatih/vim-go'
-Plug 'sebdah/vim-delve'
-
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 
@@ -59,7 +56,6 @@ if has("nvim")
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'rcarriga/nvim-notify'
     Plug 'ggandor/lightspeed.nvim'
-    " Plug 'terrortylor/nvim-comment'
     Plug 'numtostr/comment.nvim'
     Plug 'code-biscuits/nvim-biscuits'
     Plug 'AckslD/nvim-neoclip.lua'
@@ -67,6 +63,14 @@ if has("nvim")
     Plug 'liuchengxu/vista.vim'
     Plug 'sunjon/shade.nvim'
     Plug 'blackCauldron7/surround.nvim'
+
+    Plug 'ray-x/go.nvim'
+    Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make'}
+    Plug 'leoluz/nvim-dap-go'
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'theHamsta/nvim-dap-virtual-text'
+    Plug 'nvim-telescope/telescope-dap.nvim'
 endif
 
 call plug#end()

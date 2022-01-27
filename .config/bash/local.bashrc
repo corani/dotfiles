@@ -2,6 +2,7 @@
 
 #export TERM=screen-256color
 
+export GOPATH=$HOME/go
 export GOPROXY=https://int.repositories.cloud.sap/artifactory/goproxy-virtual
 export GONOSUMDB="*"
 export GOPRIVATE="github.wdf.sap.corp/*,github.tools.sap/*"
