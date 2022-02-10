@@ -4,6 +4,7 @@ wk.register({
     g = {
         name = "+goto",
         t = { "<cmd>GoAlt!<cr>", "toggle test" },
+        T = { "<cmd>Telescope lsp_type_definitions<cr>", "type definition" },
         d = { "<cmd>Telescope lsp_definitions<cr>", "definition" },
         D = "declaration",
         e = { "<cmd>Telescope lsp_document_diagnostics<cr>", "diagnostics" },
