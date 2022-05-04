@@ -62,7 +62,7 @@ if has("nvim")
     Plug 'ahmedkhalf/project.nvim'
     Plug 'liuchengxu/vista.vim'
     Plug 'sunjon/shade.nvim'
-    Plug 'blackCauldron7/surround.nvim'
+    Plug 'ur4ltz/surround.nvim'
 
     Plug 'ray-x/go.nvim'
     Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make'}

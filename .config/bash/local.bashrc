@@ -9,9 +9,6 @@ export GOPRIVATE="github.wdf.sap.corp/*,github.tools.sap/*"
 export PATH=$GOPATH/bin:$HOME/.local/bin:/usr/local/bin:/opt/riscv/bin:$HOME/.nix-profile/bin:$PATH
 export CDPATH=.:~:$GOPATH/src/github.wdf.sap.corp/velocity:$GOPATH/src/github.wdf.sap.corp/abap-agent
 
-source <(kubectl completion bash)
-source <(gh completion -s bash)
-
 alias irssi='proxychains4 irssi --config="$XDG_CONFIG_HOME"/irssi/config --home="$XDG_DATA_HOME"/irssi'
 alias tg='proxychains4 tg'
 alias newsboat='proxychains4 newsboat'
@@ -26,6 +23,8 @@ export ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=$XDG_CONFIG_HOME/asdf/tool-versions
 source $ASDF_DIR/asdf.sh 
 source $ASDF_DIR/completions/asdf.bash
 
-eval "$(zoxide init bash)"
+source <(zoxide init bash)
+source <(kubectl completion bash)
+source <(gh completion -s bash)
 
 alias wt="source ~/.local/bin/wt"
