@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#export TERM=screen-256color
+export TERM=screen-256color
 
 export GOPATH=$HOME/go
 export GOPROXY=https://int.repositories.cloud.sap/artifactory/goproxy-virtual

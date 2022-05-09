@@ -41,6 +41,8 @@ if has("nvim")
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'nvim-telescope/telescope-github.nvim'
     Plug 'hrsh7th/nvim-compe'
+    Plug 'L3MON4D3/LuaSnip'
+    Plug 'rafamadriz/friendly-snippets'
     Plug 'tami5/lspsaga.nvim'
     Plug 'folke/which-key.nvim'
     Plug 'folke/todo-comments.nvim'
@@ -53,6 +55,7 @@ if has("nvim")
     Plug 'wfxr/minimap.vim'
 
     Plug 'ThePrimeagen/git-worktree.nvim'
+    Plug 'ThePrimeagen/refactoring.nvim'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'rcarriga/nvim-notify'
     Plug 'ggandor/lightspeed.nvim'
@@ -71,6 +74,7 @@ if has("nvim")
     Plug 'rcarriga/nvim-dap-ui'
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'nvim-telescope/telescope-dap.nvim'
+    Plug 'stevearc/dressing.nvim'
 endif
 
 call plug#end()

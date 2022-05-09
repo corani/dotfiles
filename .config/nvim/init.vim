@@ -82,6 +82,16 @@ set formatoptions+=r
 set cursorline
 "set cursorcolumn
 
+" global statusline (one statusline, instead of one per split)
+" NOTE: this doesn't seem to work (at the moment?), so using the autocommand
+" below.
+set laststatus=3
+
+augroup StatusLine 
+    au!
+    au VimEnter * set laststatus=3
+augroup END
+
 highlight Normal guibg=#282828
 
 " Set cursor line color on visual mode
