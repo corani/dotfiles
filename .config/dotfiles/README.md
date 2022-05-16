@@ -12,7 +12,7 @@ dotfiles checkout
 ## Install
 
 ```bash
-apt install tmux tmuxinator curl git fortune-mod cowsay direnv pinentry-tty tree htop mc
+apt install tmux tmuxinator curl git fortune-mod cowsay direnv pinentry-tty htop mc
 
 mkdir -p ~/.config/asdf ~/Install
 
@@ -20,8 +20,10 @@ wget https://github.com/sharkdp/bat/releases/download/v0.20.0/bat_0.20.0_amd64.d
 wget https://github.com/Peltoche/lsd/releases/download/0.21.0/lsd_0.21.0_amd64.deb
 wget https://github.com/wfxr/code-minimap/releases/download/v0.6.4/code-minimap_0.6.4_amd64.deb
 wget https://github.com/dandavison/delta/releases/download/0.12.1/git-delta_0.12.1_amd64.deb
-wget https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64
 dpkg -i *.deb
+
+wget https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64
+wget https://github.com/zigtools/zls/releases/download/0.9.0/x86_64-linux.tar.xz
 
 git clone https://github.com/asdf-vm/asdf.git ~/Install/asdf
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm

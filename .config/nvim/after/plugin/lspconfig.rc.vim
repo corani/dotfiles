@@ -85,6 +85,10 @@ nvim_lsp.gopls.setup{
     on_attach = on_attach
 }
 
+nvim_lsp.zls.setup{
+    on_attach = on_attach
+}
+
 local elixirls_path = vim.fn.expand("~/Install/elixir-ls/release/language_server.sh")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 

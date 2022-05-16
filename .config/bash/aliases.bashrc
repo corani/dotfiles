@@ -29,6 +29,7 @@ alias l='ls -CF'
 
 # Download from https://github.com/Peltoche/lsd/releases 
 alias ls='lsd --icon-theme fancy'
+alias tree='lsd --tree'
 
 # ask before overwriting
 alias cp="cp -i"

@@ -75,6 +75,8 @@ if has("nvim")
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'nvim-telescope/telescope-dap.nvim'
     Plug 'stevearc/dressing.nvim'
+
+    Plug 'ziglang/zig.vim'
 endif
 
 call plug#end()
