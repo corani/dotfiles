@@ -32,6 +32,7 @@ if has("nvim")
     Plug 'kyazdani42/nvim-tree.lua'
     Plug 'kyazdani42/nvim-web-devicons'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/nvim-lsp-installer'
     Plug 'folke/lsp-colors.nvim'
     Plug 'nvim-lua/completion-nvim'
     Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -77,6 +78,7 @@ if has("nvim")
     Plug 'stevearc/dressing.nvim'
 
     Plug 'ziglang/zig.vim'
+    Plug 'simrat39/rust-tools.nvim'
 endif
 
 call plug#end()

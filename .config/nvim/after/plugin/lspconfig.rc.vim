@@ -7,6 +7,10 @@ lua << EOF
 EOF
 
 lua << EOF
+require("nvim-lsp-installer").setup {
+  automatic_installation = true
+}
+
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
@@ -87,6 +91,23 @@ nvim_lsp.gopls.setup{
 
 nvim_lsp.zls.setup{
     on_attach = on_attach
+}
+
+nvim_lsp.rust_analyzer.setup{
+  on_attach = on_attach,
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+          loadOutDirsFromCheck = true
+      },
+      procMacro = {
+          enable = true
+      },
+      checkOnSave = {
+          command = "clippy"
+      },
+    }
+  }
 }
 
 local elixirls_path = vim.fn.expand("~/Install/elixir-ls/release/language_server.sh")
