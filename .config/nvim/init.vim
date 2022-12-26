@@ -174,6 +174,9 @@ if exists("&termguicolors") && exists("&winblend")
   colorscheme gruvbox
 endif
 
+" tint must be setup or refreshed after setting the colorscheme
+lua require("tint").refresh()
+
 set exrc
 
 " vim: set foldmethod=marker foldlevel=0:

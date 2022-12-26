@@ -54,6 +54,7 @@ wk.register({
         t = { "<cmd>TroubleToggle<cr>", "trouble" },
         c = { "<cmd>lua require('telescope').extensions.neoclip.default()<cr>", "clipboard" },
         p = { "<cmd>Telescope projects<cr>", "projects" },
+        u = { "<cmd>UndotreeToggle<cr>", "undotree" },
         v = { "<cmd>Vista!!<cr>", "vista" },
     },
     z = { 

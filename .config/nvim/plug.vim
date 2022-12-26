@@ -65,8 +65,9 @@ if has("nvim")
     Plug 'AckslD/nvim-neoclip.lua'
     Plug 'ahmedkhalf/project.nvim'
     Plug 'liuchengxu/vista.vim'
-    Plug 'sunjon/shade.nvim'
+    Plug 'levouh/tint.nvim'
     Plug 'ur4ltz/surround.nvim'
+    Plug 'mbbill/undotree' 
 
     Plug 'ray-x/go.nvim'
     Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make'}
@@ -76,9 +77,11 @@ if has("nvim")
     Plug 'theHamsta/nvim-dap-virtual-text'
     Plug 'nvim-telescope/telescope-dap.nvim'
     Plug 'stevearc/dressing.nvim'
+    Plug 'lalitmee/browse.nvim'
 
     Plug 'ziglang/zig.vim'
     Plug 'simrat39/rust-tools.nvim'
+    Plug 'tetralux/odin.vim'
 endif
 
 call plug#end()

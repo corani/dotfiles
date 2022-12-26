@@ -49,7 +49,7 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
-    vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
+    --vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
 
@@ -86,7 +86,16 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.gopls.setup{
-    on_attach = on_attach
+    on_attach = on_attach,
+    settings = {
+        ["gopls"] = {
+            codelenses = { 
+                ["generate"] = true, 
+                ["gc_details"] = true,
+                ["test"] = true,
+            },
+        },
+    },
 }
 
 nvim_lsp.zls.setup{
