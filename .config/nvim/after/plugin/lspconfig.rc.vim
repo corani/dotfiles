@@ -7,10 +7,6 @@ lua << EOF
 EOF
 
 lua << EOF
-require("nvim-lsp-installer").setup {
-  automatic_installation = true
-}
-
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
@@ -46,12 +42,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>rf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   -- formatting
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     vim.api.nvim_command [[augroup Format]]
     vim.api.nvim_command [[autocmd! * <buffer>]]
     --vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     vim.api.nvim_command [[augroup END]]
   end
+
+  -- workaround for issue in signature help
+  client.resolved_capabilities = client.server_capabilities
 
   require'completion'.on_attach(client, bufnr)
 
@@ -85,10 +84,29 @@ local on_attach = function(client, bufnr)
   }
 end
 
+-- Configure Golang LSP.
+--
+-- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
+-- https://github.com/golang/tools/blob/master/gopls/doc/analyzers.md
+-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gopls
+-- https://github.com/golang/tools/blob/master/gopls/doc/vim.md#neovim
+-- https://www.getman.io/posts/programming-go-in-neovim/
 nvim_lsp.gopls.setup{
     on_attach = on_attach,
     settings = {
         ["gopls"] = {
+            analyses = {
+                nilness = true,
+                unusedparams = true,
+                unusedvariable = true,
+                unusedwrite = true,
+                useany = true,
+            },
+            experimentalPostfixCompletions = true,
+            gofumpt = true,
+            staticcheck = true,
+            usePlaceholders = true,
             codelenses = { 
                 ["generate"] = true, 
                 ["gc_details"] = true,

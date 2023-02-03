@@ -12,25 +12,22 @@ dotfiles checkout
 ## Install
 
 ```bash
-apt install tmux tmuxinator curl git fortune-mod cowsay direnv pinentry-tty htop mc
+apt install curl git fortune-mod cowsay direnv pinentry-tty htop mc bison gawk bash-completion
 
 mkdir -p ~/.config/asdf ~/Install
 
-wget https://github.com/sharkdp/bat/releases/download/v0.20.0/bat_0.20.0_amd64.deb
-wget https://github.com/Peltoche/lsd/releases/download/0.21.0/lsd_0.21.0_amd64.deb
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+wget https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_amd64.deb
 wget https://github.com/wfxr/code-minimap/releases/download/v0.6.4/code-minimap_0.6.4_amd64.deb
-wget https://github.com/dandavison/delta/releases/download/0.12.1/git-delta_0.12.1_amd64.deb
 dpkg -i *.deb
 
-wget https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64
+wget https://github.com/docker/compose/releases/download/v2.11.0/docker-compose-linux-x86_64
+wget https://github.com/ivaaaan/smug/releases/download/v0.3.2/smug_0.3.2_Linux_x86_64.tar.gz
 wget https://github.com/zigtools/zls/releases/download/0.9.0/x86_64-linux.tar.xz
 
 git clone https://github.com/asdf-vm/asdf.git ~/Install/asdf
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
-git clone https://github.com/junegunn/fzf.git ~/Install/fzf
-
-~/Install/fzf/install
-cp ~/Install/fzf/bin/fzf ~/.local/bin/
 ```
 
 ## ASDF
@@ -49,4 +46,7 @@ asdf global neovim latest
 - github-cli 
 - kubectl
 - ripgrep
-
+- fzf
+- bat 
+- delta 
+- tmux 

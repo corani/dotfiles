@@ -31,6 +31,10 @@ set timeoutlen=500
 set clipboard=unnamedplus
 set cmdheight=2
 set splitbelow splitright
+set spell
+
+" mouse in normal mode
+set mouse=n
 
 set ruler
 set scrolloff=5
@@ -178,5 +182,8 @@ endif
 lua require("tint").refresh()
 
 set exrc
+
+" TODO(daniel): convert vimscript to lua files
+lua vim.o.ch=0
 
 " vim: set foldmethod=marker foldlevel=0:
