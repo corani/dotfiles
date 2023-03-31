@@ -1,12 +1,3 @@
-if !exists('g:lspconfig')
-  finish
-endif
-
-lua << EOF
---vim.lsp.set_log_level("debug")
-EOF
-
-lua << EOF
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
@@ -151,4 +142,13 @@ nvim_lsp.elixirls.setup({
         }
     }
 })
-EOF
+
+vim.api.nvim_create_user_command('LspBufCodeAction', function()
+    opts = vim.lsp.util.make_given_range_params()
+    vim.lsp.buf.code_action({
+        range = {
+            ["start"] = { opts.range.start.line, opts.range.start.character },
+            ["end"] = { opts.range.start.line+1, opts.range.start.character },
+        },
+    })
+end, {})

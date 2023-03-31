@@ -49,7 +49,7 @@ wk.register({
         a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "code actions" },
         b = { "<cmd>lua require('nvim-biscuits').toggle_biscuits()<cr>", "biscuits" },
         d = { "<cmd>lua vim.diagnostic.open_float()<cr>", "line diagnostics" },
-        A = { "<cmd>lua vim.lsp.buf.range_code_action()<cr>", "range code actions" },
+        A = { "<cmd>LspBufCodeAction<cr>", "range code actions" },
         h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "hover" },
         l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "run codelens" },
         L = { "<cmd>lua vim.lsp.codelens.refresh()<cr>", "refresh codelens" },

@@ -164,7 +164,8 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 let g:go_doc_keywordprg_enabled=0
 let g:go_def_mapping_enabled=0
 
-runtime ./plug.vim
+lua require("plug").setup()
+
 runtime ./maps.vim
 
 " true color
@@ -177,9 +178,6 @@ if exists("&termguicolors") && exists("&winblend")
   set background=dark
   colorscheme gruvbox
 endif
-
-" tint must be setup or refreshed after setting the colorscheme
-lua require("tint").refresh()
 
 set exrc
 
