@@ -49,8 +49,6 @@ local on_attach = function(client, bufnr)
   -- workaround for issue in signature help
   client.resolved_capabilities = client.server_capabilities
 
-  require'completion'.on_attach(client, bufnr)
-
   --protocol.SymbolKind = { }
   protocol.CompletionItemKind = {
     '', -- Text

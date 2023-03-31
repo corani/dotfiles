@@ -32,7 +32,6 @@ local plugins = {
     "neovim/nvim-lspconfig",
     "jose-elias-alvarez/null-ls.nvim",
     "folke/lsp-colors.nvim",
-    "nvim-lua/completion-nvim",
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",

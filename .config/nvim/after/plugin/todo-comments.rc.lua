@@ -8,6 +8,15 @@ require('todo-comments').setup({
         pattern = [[<(KEYWORDS)(\(.+\))?:]]
     },
     search = {
+        command="rg",
+        args = {
+            "--glob=!vendor",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+        },
         pattern = [[\b(KEYWORDS)(\(.+\))?:]]
     }
 })
