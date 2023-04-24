@@ -176,7 +176,11 @@ if exists("&termguicolors") && exists("&winblend")
   set wildoptions=pum
   set pumblend=5
   set background=dark
-  colorscheme gruvbox
+  let g:gruvbox_material_background = 'medium'      " hard, medium, soft
+  let g:gruvbox_material_foreground = 'original'    " material, mix, original
+  let g:gruvbox_material_transparent_background = 2
+  let g:gruvbox_material_dim_inactive_windows = 1
+  colorscheme gruvbox-material
 endif
 
 set exrc
