@@ -33,6 +33,9 @@ set cmdheight=2
 set splitbelow splitright
 set spell
 
+" when wrapping, don't break in the middle of a word
+set linebreak
+
 " mouse in normal mode
 set mouse=n
 

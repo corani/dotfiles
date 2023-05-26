@@ -1,5 +1,6 @@
 local nvim_lsp = require('lspconfig')
-local protocol = require'vim.lsp.protocol'
+local protocol = require('vim.lsp.protocol')
+local util = require('lspconfig/util')
 
 -- Use an on_attach function to only map the following keys 
 -- after the language server attaches to the current buffer
@@ -85,6 +86,7 @@ end
 -- https://www.getman.io/posts/programming-go-in-neovim/
 nvim_lsp.gopls.setup{
     on_attach = on_attach,
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         ["gopls"] = {
             analyses = {
@@ -97,9 +99,10 @@ nvim_lsp.gopls.setup{
             experimentalPostfixCompletions = true,
             gofumpt = true,
             staticcheck = true,
+            completeUnimported = true,
             usePlaceholders = true,
-            codelenses = { 
-                ["generate"] = true, 
+            codelenses = {
+                ["generate"] = true,
                 ["gc_details"] = true,
                 ["test"] = true,
             },

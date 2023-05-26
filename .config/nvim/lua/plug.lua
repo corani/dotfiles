@@ -14,8 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugins
 local plugins = {
-    "junegunn/vim-plug",
+    -- "junegunn/vim-plug",
     "mhinz/vim-startify",
+    "stevearc/oil.nvim",
     "mzlogin/vim-markdown-toc",
     "terryma/vim-multiple-cursors",
     "tpope/vim-fugitive",
@@ -92,6 +93,14 @@ local plugins = {
     "simrat39/rust-tools.nvim",
     "tetralux/odin.vim",
     "rhysd/vim-llvm",
+
+    {
+        "norcalli/nvim-colorizer.lua",
+        cmd = "ColorizerToggle",
+        config = function()
+            require("colorizer").setup()
+        end,
+    },
 }
 
 local M = {}

@@ -5,7 +5,12 @@ require('todo-comments').setup({
     },
     highlight = {
         keyword = "bg",
-        pattern = [[<(KEYWORDS)(\(.+\))?:]]
+        pattern = [[<(KEYWORDS)(\(.+\))?:]],
+        comments_only = true,
+    },
+    colors = { -- find colors for highlight groups with `:highlight`
+        info    = { "DiagnosticSignInfo", "DiagnosticInfo", "#2563EB" },
+        warning = { "DiagnosticSignWarn", "DiagnosticWarn", "WarningMsg", "#FBBF24" },
     },
     search = {
         command="rg",
