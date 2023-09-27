@@ -34,6 +34,7 @@ local plugins = {
     "neovim/nvim-lspconfig",
     "jose-elias-alvarez/null-ls.nvim",
     "folke/lsp-colors.nvim",
+    --"lvimuser/lsp-inlayhints.nvim",
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -99,6 +100,20 @@ local plugins = {
         cmd = "ColorizerToggle",
         config = function()
             require("colorizer").setup()
+        end,
+    },
+    "tpope/vim-dadbod",
+    "kristijanhusak/vim-dadbod-ui",
+    "kristijanhusak/vim-dadbod-completion",
+    {
+        "tpope/vim-dadbod",
+        opt = true,
+        requires = {
+            "kristijanhusak/vim-dadbod-ui",
+            "kristijanhusak/vim-dadbod-completion",
+        },
+        config = function()
+            require("config/dadbod").setup()
         end,
     },
 }

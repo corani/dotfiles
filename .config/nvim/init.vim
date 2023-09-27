@@ -167,6 +167,22 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 let g:go_doc_keywordprg_enabled=0
 let g:go_def_mapping_enabled=0
 
+" TODO(daniel) move this to a plugin / separate file. Convert to lua?
+function! HANA_interactive(url) abort
+    let url = db#url#parse(a:url)
+    let cmd = [
+    \    'hdbsql', 
+    \    '-u', get(url, 'user'), 
+    \    '-p', get(url, 'password'), 
+    \    '-n', get(url, 'host') . ':' . get(url, 'port', '30015'),
+    \    '-x', '-j', '-A', '-quiet'
+    \]
+    return cmd
+endfunction
+
+let g:db_adapter_hana = 'HANA_'
+let g:dbext_default_HANA_bin = 'hdbsql'
+
 lua require("plug").setup()
 
 runtime ./maps.vim
