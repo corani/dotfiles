@@ -76,7 +76,7 @@ local on_attach = function(client, bufnr)
   }
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Configure Golang LSP.
 --
@@ -105,12 +105,12 @@ nvim_lsp.gopls.setup{
             staticcheck = true,
             completeUnimported = true,
             usePlaceholders = true,
-            -- inlayhint = {
-            --     -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
-            --     ["parameterNames"] = true,
-            --     ["functionTypeParameters"] = true,
-            --     ["constantValues"] = true,
-            -- },
+            inlayhint = {
+                -- https://github.com/golang/tools/blob/master/gopls/doc/inlayHints.md
+                ["parameterNames"] = true,
+                ["functionTypeParameters"] = true,
+                ["constantValues"] = true,
+            },
             codelenses = {
                 ["generate"] = true,
                 ["gc_details"] = true,

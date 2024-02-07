@@ -36,6 +36,10 @@ wk.register({
         n = "rename",
         f = "format"
     },
+    R = {
+        name = "+run",
+        R = { "<Plug>RestNvim", "request under cursor" },
+    },
     f = {
         name = "+find",
         f = { "<cmd>Telescope find_files<cr>", "file" },

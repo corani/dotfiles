@@ -23,8 +23,15 @@ local plugins = {
     -- auto-close parenthesis
     "cohama/lexima.vim",
     "gpanders/editorconfig.nvim",
-    "morhetz/gruvbox",
-    "sainnhe/gruvbox-material",
+    {
+        "ellisonleao/gruvbox.nvim",
+        config = function()
+            require("gruvbox") .setup({
+                dim_inactive = true,
+                transparent_mode = true,
+            })
+        end
+    },
     "j-hui/fidget.nvim",
     "hoob3rt/lualine.nvim",
     "kyazdani42/nvim-tree.lua",
@@ -48,7 +55,11 @@ local plugins = {
         build = "make",
     },
     "nvim-telescope/telescope-github.nvim",
-    "hrsh7th/nvim-compe",
+    -- "hrsh7th/nvim-compe",
+    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-cmdline",
     "L3MON4D3/LuaSnip",
     "rafamadriz/friendly-snippets",
     "tami5/lspsaga.nvim",
@@ -116,6 +127,46 @@ local plugins = {
             require("config/dadbod").setup()
         end,
     },
+    {
+        "rest-nvim/rest.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim"
+        },
+        -- see: https://github.com/rest-nvim/rest.nvim/issues/246
+        commit = "8b62563",
+        config = function()
+            -- see: https://github.com/rest-nvim/rest.nvim
+            require("rest-nvim").setup({
+                result = {
+                    formatters = {
+                        json = "jq",
+                        html = false
+                    }
+                }
+            })
+        end,
+    },
+    "github/copilot.vim",
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+            -- add options here
+        },
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            -- optional:
+            "rcarriga/nvim-notify",
+        },
+    },
+    {
+        "rcarriga/nvim-notify",
+        config = function()
+            require("notify").setup({
+                background_colour = "#000000",
+            })
+        end,
+    }
 }
 
 local M = {}
